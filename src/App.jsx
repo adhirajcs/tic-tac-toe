@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Home from './Home'
-import Board from './HomeReactDoc'
+import Board from './Extra/HomeReactDoc'
 
 // import './App.css'
 
