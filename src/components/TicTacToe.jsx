@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Board from "./Board";
+import GameOver from "./GameOver";
+import GameState from "./GameState";
 
 const PLAYER_X = "X";
 const PLAYER_O = "O";
@@ -26,26 +28,45 @@ const winningCombinations = [
   },
 ];
 
+const checkWinner = (tiles, setStrikeClass, setGameState) => {
+  for (const { combo, combStrikeClass } of winningCombinations) {
+    const titleValue1 = tiles[combo[0]];
+    const titleValue2 = tiles[combo[1]];
+    const titleValue3 = tiles[combo[2]];
+
+    if (
+      titleValue1 != null &&
+      titleValue1 === titleValue2 &&
+      titleValue2 === titleValue3
+    ) {
+      setStrikeClass(combStrikeClass);
+      if (titleValue1 === PLAYER_X) {
+        setGameState(GameState.playerXWins);
+      } else if (titleValue1 === PLAYER_O) {
+        setGameState(GameState.playerOWins);
+      }
+      return;
+    }
+  }
+
+  const areAllTilesFilledIn = tiles.every((tile) => {
+    return tile !== null;
+  });
+  if (areAllTilesFilledIn) {
+    setGameState(GameState.draw);
+  }
+};
+
 const TicTacToe = () => {
   const [tiles, setTiles] = useState(Array(9).fill(null));
   const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
   const [strikeClass, setStrikeClass] = useState();
+  const [gameState, setGameState] = useState(GameState.inProgress);
 
   useEffect(() => {
-    checkWinner(tiles, setStrikeClass);
+    checkWinner(tiles, setStrikeClass, setGameState);
   });
 
-  const checkWinner = (tiles, setStrikeClass) => {
-    for (const { combo, combStrikeClass } of winningCombinations) {
-      const titleValue1 = tiles[combo[0]];
-      const titleValue2 = tiles[combo[1]];
-      const titleValue3 = tiles[combo[2]];
-
-      if (titleValue1 != null && titleValue1 === titleValue2 && titleValue2 === titleValue3) {
-        setStrikeClass(combStrikeClass)
-      }
-    }
-  };
 
   const handleTileClick = (index) => {
     if (tiles[index] !== null) {
@@ -61,6 +82,8 @@ const TicTacToe = () => {
       setPlayerTurn(PLAYER_X);
     }
   };
+
+  
   return (
     <>
       <div className="body flex flex-col items-center justify-center text-center bg-gray-900 text-white min-h-screen">
@@ -71,6 +94,7 @@ const TicTacToe = () => {
           onTileClick={handleTileClick}
           strikeClass={strikeClass}
         />
+        <GameOver gameState={gameState} />
       </div>
     </>
   );
