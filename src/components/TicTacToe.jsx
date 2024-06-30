@@ -69,7 +69,7 @@ const TicTacToe = () => {
 
 
   const handleTileClick = (index) => {
-    if (tiles[index] !== null) {
+    if (tiles[index] !== null || gameState !== GameState.inProgress) {
       return;
     }
 
