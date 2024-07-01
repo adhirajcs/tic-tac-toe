@@ -69,7 +69,7 @@ const TicTacToe = () => {
   });
 
   const handleReset = () => {
-    setGameState(gameState.inProgress)
+    setGameState(GameState.inProgress)
     setTiles(Array(9).fill(null))
     setPlayerTurn(PLAYER_X)
     setStrikeClass(null)
