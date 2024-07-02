@@ -3,6 +3,13 @@ import Board from "./Board";
 import GameOver from "./GameOver";
 import GameState from "./GameState";
 import Reset from "./Reset";
+import gameOverSoundAsset from "../sounds/game_over.wav";
+import clickSoundAsset from "../sounds/click.wav";
+
+const gameOverSound = new Audio(gameOverSoundAsset);
+gameOverSound.volume = 0.2;
+const clickSound = new Audio(clickSoundAsset);
+clickSound.volume = 0.5;
 
 const PLAYER_X = "X";
 const PLAYER_O = "O";
@@ -66,14 +73,26 @@ const TicTacToe = () => {
 
   useEffect(() => {
     checkWinner(tiles, setStrikeClass, setGameState);
-  });
+  }, [tiles]);
+
+  useEffect(() => {
+    if(tiles.some((tile) => tile != null)) {
+      clickSound.play()
+    }
+  }, [tiles])
+
+  useEffect(() => {
+    if(gameState !== GameState.inProgress) {
+      gameOverSound.play()
+    }
+  }, [gameState])
 
   const handleReset = () => {
-    setGameState(GameState.inProgress)
-    setTiles(Array(9).fill(null))
-    setPlayerTurn(PLAYER_X)
-    setStrikeClass(null)
-  }
+    setGameState(GameState.inProgress);
+    setTiles(Array(9).fill(null));
+    setPlayerTurn(PLAYER_X);
+    setStrikeClass(null);
+  };
 
   const handleTileClick = (index) => {
     if (tiles[index] !== null || gameState !== GameState.inProgress) {
@@ -90,7 +109,6 @@ const TicTacToe = () => {
     }
   };
 
-  
   return (
     <>
       <div className="body flex flex-col items-center justify-center text-center bg-gray-900 text-white min-h-screen">
@@ -102,7 +120,7 @@ const TicTacToe = () => {
           strikeClass={strikeClass}
         />
         <GameOver gameState={gameState} />
-        <Reset gameState={gameState} onReset={handleReset}/>
+        <Reset gameState={gameState} onReset={handleReset} />
       </div>
     </>
   );
