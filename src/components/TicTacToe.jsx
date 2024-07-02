@@ -7,6 +7,7 @@ import ToolTip from "./ToolTip";
 
 import gameOverSoundAsset from "../sounds/mixkit-achievement-bell.wav";
 import clickSoundAsset from "../sounds/mixkit-cool-interface-click-tone.wav";
+import Footer from "./Footer";
 
 const gameOverSound = new Audio(gameOverSoundAsset);
 gameOverSound.volume = 0.1;
@@ -113,7 +114,7 @@ const TicTacToe = () => {
 
   return (
     <>
-      <div className="body flex flex-col items-center justify-center text-center bg-gray-900 text-white min-h-screen pb-10">
+      <div className="body flex flex-col items-center justify-center text-center bg-gray-900 text-white min-h-screen pb-14">
         {/* LinkedIn and gitHub icons */}
         <ToolTip />
 
@@ -126,6 +127,7 @@ const TicTacToe = () => {
         />
         <GameOver gameState={gameState} />
         <Reset gameState={gameState} onReset={handleReset} />
+        <Footer />
       </div>
     </>
   );
