@@ -3,8 +3,8 @@ import Board from "./Board";
 import GameOver from "./GameOver";
 import GameState from "./GameState";
 import Reset from "./Reset";
-// import gameOverSoundAsset from "../sounds/game_over.wav";
-// import clickSoundAsset from "../sounds/click.wav";
+import ToolTip from "./ToolTip";
+
 import gameOverSoundAsset from "../sounds/mixkit-achievement-bell.wav";
 import clickSoundAsset from "../sounds/mixkit-cool-interface-click-tone.wav";
 
@@ -78,16 +78,16 @@ const TicTacToe = () => {
   }, [tiles]);
 
   useEffect(() => {
-    if(tiles.some((tile) => tile != null)) {
-      clickSound.play()
+    if (tiles.some((tile) => tile != null)) {
+      clickSound.play();
     }
-  }, [tiles])
+  }, [tiles]);
 
   useEffect(() => {
-    if(gameState !== GameState.inProgress) {
-      gameOverSound.play()
+    if (gameState !== GameState.inProgress) {
+      gameOverSound.play();
     }
-  }, [gameState])
+  }, [gameState]);
 
   const handleReset = () => {
     setGameState(GameState.inProgress);
@@ -113,8 +113,11 @@ const TicTacToe = () => {
 
   return (
     <>
-      <div className="body flex flex-col items-center justify-center text-center bg-gray-900 text-white min-h-screen">
-        <h1 className="font-bold text-3xl pt-3 pb-5">Tic Tac Toe</h1>
+      <div className="body flex flex-col items-center justify-center text-center bg-gray-900 text-white min-h-screen pb-10">
+        {/* LinkedIn and gitHub icons */}
+        <ToolTip />
+
+        <h1 className="relative font-bold text-3xl py-5">Tic Tac Toe</h1>
         <Board
           playerTurn={playerTurn}
           tiles={tiles}
