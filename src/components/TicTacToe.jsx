@@ -9,7 +9,7 @@ import gameOverSoundAsset from "../sounds/mixkit-achievement-bell.wav";
 import clickSoundAsset from "../sounds/mixkit-cool-interface-click-tone.wav";
 
 const gameOverSound = new Audio(gameOverSoundAsset);
-gameOverSound.volume = 0.2;
+gameOverSound.volume = 0.1;
 const clickSound = new Audio(clickSoundAsset);
 clickSound.volume = 0.1;
 
