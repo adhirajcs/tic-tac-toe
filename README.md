@@ -4,7 +4,7 @@
 
 ## Deployment
 
-The project is deployed and can be accessed [here](https://tic-tac-toe-gamma-sooty.vercel.app/).
+The project is deployed and can be accessed at [tic-tac-toe-gamma-sooty.vercel.app](https://tic-tac-toe-gamma-sooty.vercel.app/).
 
 ## Features
 
