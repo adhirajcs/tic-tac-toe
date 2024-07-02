@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-[Tic Tac Toe] is a simple Tic Tac Toe game created using React and Tailwind CSS.
+This is a simple Tic Tac Toe game created using React and Tailwind CSS.
 
 ## Deployment
 
