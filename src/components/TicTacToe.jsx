@@ -10,9 +10,9 @@ import clickSoundAsset from "../sounds/mixkit-cool-interface-click-tone.wav";
 import Footer from "./Footer";
 
 const gameOverSound = new Audio(gameOverSoundAsset);
-gameOverSound.volume = 0.1;
+gameOverSound.volume = 0.5;
 const clickSound = new Audio(clickSoundAsset);
-clickSound.volume = 0.1;
+clickSound.volume = 0.8;
 
 const PLAYER_X = "X";
 const PLAYER_O = "O";
