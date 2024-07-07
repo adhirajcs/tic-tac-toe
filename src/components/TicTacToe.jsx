@@ -19,23 +19,25 @@ const PLAYER_O = "O";
 
 const winningCombinations = [
   // Rows
-  { combo: [0, 1, 2], combStrikeClass: "w-full h-1 top-[15%]" },
-  { combo: [3, 4, 5], combStrikeClass: "w-full h-1 top-[48%]" },
-  { combo: [6, 7, 8], combStrikeClass: "w-full h-1 top-[83%]" },
+  { combo: [0, 1, 2, 3], combStrikeClass: "w-full h-1 top-[12.5%]" },
+  { combo: [4, 5, 6, 7], combStrikeClass: "w-full h-1 top-[37.5%]" },
+  { combo: [8, 9, 10, 11], combStrikeClass: "w-full h-1 top-[62.5%]" },
+  { combo: [12, 13, 14, 15], combStrikeClass: "w-full h-1 top-[87.5%]" },
 
   // Columns
-  { combo: [0, 3, 6], combStrikeClass: "h-full w-1 left-[15.6%]" },
-  { combo: [1, 4, 7], combStrikeClass: "h-full w-1 left-[48.7%]" },
-  { combo: [2, 5, 8], combStrikeClass: "h-full w-1 left-[82.7%]" },
+  { combo: [0, 4, 8, 12], combStrikeClass: "h-full w-1 left-[12.5%]" },
+  { combo: [1, 5, 9, 13], combStrikeClass: "h-full w-1 left-[37.5%]" },
+  { combo: [2, 6, 10, 14], combStrikeClass: "h-full w-1 left-[62.5%]" },
+  { combo: [3, 7, 11, 15], combStrikeClass: "h-full w-1 left-[87.5%]" },
 
   // Diagonals
   {
-    combo: [0, 4, 8],
-    combStrikeClass: "w-[90%] h-1 top-1/2 left-[5%] transform skew-y-[45deg]",
+    combo: [0, 5, 10, 15],
+    combStrikeClass: "w-[100%] h-1 top-1/2 left-0 transform rotate-[45deg]",
   },
   {
-    combo: [2, 4, 6],
-    combStrikeClass: "w-[90%] h-1 top-1/2 left-[5%] transform -skew-y-[45deg]",
+    combo: [3, 6, 9, 12],
+    combStrikeClass: "w-[100%] h-1 top-1/2 left-0 transform -rotate-[45deg]",
   },
 ];
 
@@ -44,11 +46,12 @@ const checkWinner = (tiles, setStrikeClass, setGameState) => {
     const titleValue1 = tiles[combo[0]];
     const titleValue2 = tiles[combo[1]];
     const titleValue3 = tiles[combo[2]];
+    const titleValue4 = tiles[combo[3]];
 
     if (
       titleValue1 != null &&
       titleValue1 === titleValue2 &&
-      titleValue2 === titleValue3
+      titleValue2 === titleValue3 && titleValue3 === titleValue4
     ) {
       setStrikeClass(combStrikeClass);
       if (titleValue1 === PLAYER_X) {
@@ -69,7 +72,7 @@ const checkWinner = (tiles, setStrikeClass, setGameState) => {
 };
 
 const TicTacToe = () => {
-  const [tiles, setTiles] = useState(Array(9).fill(null));
+  const [tiles, setTiles] = useState(Array(16).fill(null));
   const [playerTurn, setPlayerTurn] = useState(PLAYER_X);
   const [strikeClass, setStrikeClass] = useState();
   const [gameState, setGameState] = useState(GameState.inProgress);
@@ -92,7 +95,7 @@ const TicTacToe = () => {
 
   const handleReset = () => {
     setGameState(GameState.inProgress);
-    setTiles(Array(9).fill(null));
+    setTiles(Array(16).fill(null));
     setPlayerTurn(PLAYER_X);
     setStrikeClass(null);
   };
